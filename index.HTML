@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة وبل نجد العقارية | Wabl Najd</title>
+    <style>
+        :root {
+            --primary-beige: #c9c0b7; 
+            --dark-gray: #4a4a48;    
+            --white: #ffffff;
+            --soft-gray: #f8f7f6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--white); color: var(--dark-gray); line-height: 1.6; }
+
+        header { background-color: var(--white); padding: 20px; text-align: center; }
+        .logo-box { max-width: 250px; margin: 0 auto; cursor: pointer; }
+
+        nav { background: var(--dark-gray); padding: 12px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        nav a { color: var(--white); text-decoration: none; margin: 0 15px; font-weight: bold; }
+
+        .hero {
+            background: linear-gradient(rgba(201, 192, 183, 0.8), rgba(201, 192, 183, 0.9)), 
+                        url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover; background-position: center; padding: 100px 20px; text-align: center;
+        }
+
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 50px; font-size: 2rem; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary-beige); margin: 10px auto; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        
+        .service-card {
+            background: var(--soft-gray);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        .service-card:hover { border-color: var(--primary-beige); transform: translateY(-5px); }
+
+        .offer-card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #eee; position: relative; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .offer-img { height: 200px; width: 100%; object-fit: cover; background: var(--primary-beige); }
+        .offer-info { padding: 20px; }
+        .price { color: #b08d57; font-weight: bold; font-size: 1.2rem; margin: 10px 0; }
+
+        #admin-panel { display: none; background: #f0f0f0; padding: 30px; margin: 20px auto; max-width: 800px; border-radius: 15px; border: 2px dashed var(--primary-beige); }
+        .admin-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; }
+        .btn { padding: 12px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; cursor: pointer; border: none; transition: 0.3s; }
+        .btn-beige { background: var(--primary-beige); color: var(--dark-gray); }
+        .btn-delete { background: #ff4444; color: white; padding: 6px 12px; font-size: 0.8rem; position: absolute; top: 15px; left: 15px; border-radius: 8px; z-index: 10; }
+
+        .contact-area { background-color: var(--dark-gray); color: var(--white); text-align: center; padding: 80px 20px; max-width: 100%; }
+        footer { background: #222; color: #888; text-align: center; padding: 25px; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="logo-box" onclick="adminLogin()">
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#4a4a48" stroke-width="2.5" fill="none">
+                <line x1="150" y1="120" x2="150" y2="40" /><line x1="170" y1="120" x2="170" y2="20" />
+                <line x1="190" y1="120" x2="190" y2="10" /><line x1="210" y1="120" x2="210" y2="10" />
+                <line x1="230" y1="120" x2="230" y2="30" /><line x1="250" y1="120" x2="250" y2="60" />
+                <line x1="70" y1="120" x2="330" y2="120" />
+            </g>
+            <text x="200" y="180" font-family="Arial" font-size="60" text-anchor="middle" fill="#4a4a48">WN</text>
+            <text x="200" y="222" font-family="Cairo" font-size="24" text-anchor="middle" fill="#4a4a48" font-weight="700">وبل نجد العقارية</text>
+        </svg>
+    </div>
+</header>
+
+<nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#services">خدماتنا</a>
+    <a href="#offers">العروض العقارية</a>
+    <a href="#contact">اتصل بنا</a>
+</nav>
+
+<div id="admin-panel">
+    <h3 style="margin-bottom: 15px;">إضافة عرض جديد (إدارة وبل نجد)</h3>
+    <input type="text" id="in-img" class="admin-input" placeholder="رابط صورة العقار (أو اتركه فارغاً للصورة الافتراضية)">
+    <input type="text" id="in-title" class="admin-input" placeholder="اسم العقار">
+    <input type="text" id="in-price" class="admin-input" placeholder="السعر">
+    <input type="text" id="in-desc" class="admin-input" placeholder="الوصف (المهدية - شارع كفاية)">
+    <div style="margin-top: 15px;">
+        <button onclick="saveOffer()" class="btn btn-beige">نشر العرض</button>
+        <button onclick="location.reload()" class="btn" style="background:#ccc; margin-right:10px;">إغلاق الإدارة</button>
+    </div>
+</div>
+
+<section class="hero" id="home" style="max-width: 100%;">
+    <h1>خيارك العقاري الأمثل في المهدية</h1>
+    <p>شركة وبل نجد العقارية.. خبرة محلية بلمسة احترافية.</p>
+</section>
+
+<section id="services">
+    <h2 class="section-title">خدماتنا العقارية</h2>
+    <div class="grid-container">
+        <div class="service-card">
+            <h3>التسويق العقاري</h3>
+            <p>نستخدم أحدث الأدوات والمنصات لضمان وصول عقارك لأكبر شريحة من المشترين.</p>
+        </div>
+        <div class="service-card">
+            <h3>إدارة الأملاك</h3>
+            <p>حلول متكاملة لمتابعة عقارك، تحصيل الإيجارات، والصيانة الدورية.</p>
+        </div>
+        <div class="service-card">
+            <h3>الوساطة العقارية</h3>
+            <p>نساعدك في إيجاد مسكنك المثالي في حي المهدية وكافة أحياء غرب الرياض.</p>
+        </div>
+    </div>
+</section>
+
+<section id="offers" style="background-color: var(--soft-gray); max-width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h2 class="section-title">أحدث العروض الحصرية</h2>
+        <div id="offers-list" class="grid-container">
+            </div>
+    </div>
+</section>
+
+<section class="contact-area" id="contact">
+    <h2>تواصل مباشر</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">نحن دائماً في خدمتك بمكتبنا في المهدية.</p>
+    <div style="margin-bottom: 30px;">
+        <p>📍 حي المهدية - شارع كفاية بنت أبي الفتوح</p>
+        <p>📞 الجوال: 0559944329</p>
+    </div>
+    <a href="https://wa.me/966559944329" class="btn btn-beige" style="background:#25d366; color:white;">تحدث معنا عبر واتساب</a>
+</section>
+
+<footer>
+    &copy; 2026 شركة وبل نجد العقارية. جميع الحقوق محفوظة.
+</footer>
+
+<script>
+    function adminLogin() {
+        let pass = prompt("أدخل كلمة المرور للإدارة:");
+        if (pass === "1234") {
+            document.getElementById('admin-panel').style.display = 'block';
+            window.scrollTo(0, 0);
+            showOffers(); 
+        }
+    }
+
+    let myOffers = JSON.parse(localStorage.getItem('wabl_data')) || [];
+
+    function showOffers() {
+        const list = document.getElementById('offers-list');
+        const isAdmin = document.getElementById('admin-panel').style.display === 'block';
+        
+        if (myOffers.length === 0) {
+            list.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>لا توجد عروض حالياً، سيتم إضافتها قريباً.</p>";
+            return;
+        }
+
+        list.innerHTML = myOffers.map((o, index) => `
+            <div class="offer-card">
+                ${isAdmin ? `<button class="btn-delete" onclick="removeOffer(${index})">حذف العرض</button>` : ''}
+                <img src="${o.img || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=400&q=80'}" class="offer-img">
+                <div class="offer-info">
+                    <h3>${o.title}</h3>
+                    <p class="price">${o.price}</p>
+                    <p>${o.desc}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function saveOffer() {
+        const title = document.getElementById('in-title').value;
+        const price = document.getElementById('in-price').value;
+        const desc = document.getElementById('in-desc').value;
+        const img = document.getElementById('in-img').value;
+
+        if(title && price) {
+            myOffers.push({img, title, price, desc});
+            localStorage.setItem('wabl_data', JSON.stringify(myOffers));
+            showOffers();
+            alert("تم إضافة العرض الجديد بنجاح");
+            document.getElementById('in-title').value = '';
+            document.getElementById('in-price').value = '';
+            document.getElementById('in-desc').value = '';
+        } else {
+            alert("يرجى إدخال اسم العقار والسعر على الأقل.");
+        }
+    }
+
+    function removeOffer(idx) {
+        if(confirm("هل أنت متأكد من حذف هذا العرض من موقع الشركة؟")) {
+            myOffers.splice(idx, 1);
+            localStorage.setItem('wabl_data', JSON.stringify(myOffers));
+            showOffers();
+        }
+    }
+
+    window.onload = showOffers;
+</script>
+
+</body>
+</html>
